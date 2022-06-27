@@ -3,7 +3,7 @@ import { UserService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { ApiTags } from '@nestjs/swagger';
 
-@ApiTags('users')
+@ApiTags('status')
 @Controller('users')
 export class UserController {
   constructor(private userService: UserService) {}
@@ -13,7 +13,7 @@ export class UserController {
     return this.userService.findAll();
   }
 
-  @Post()
+  @Post('/user')
   create(@Body() createUserDto: CreateUserDto) {
     return this.userService.create(createUserDto);
   }
