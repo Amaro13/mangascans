@@ -1,26 +1,32 @@
-import { IsNumber, IsPositive, IsString } from 'class-validator';
+import { IsDate, IsEmail, IsString, Matches, MinLength } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class CreateUserDto {
-  @IsNumber()
-  @IsPositive()
-  @ApiProperty({
-    description: 'The user`s age.',
-    example: 18,
-  })
-  age: number;
-
   @IsString()
   @ApiProperty({
     description: 'The user`s name.',
     example: "Jullian",
   })
-  name: string;
+  username: string;
+
+
+  @IsEmail()
+  @ApiProperty({
+    example: 'stranger@outlook.com',
+    description: 'Email to be created',
+  })
+  email: string;
 
   @IsString()
-  @ApiProperty({
-    description: 'The user`s date of birth.',
-    example: "19/01/1993",
+  @MinLength(8)
+  @Matches(/((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/, {
+    // checks if the password is weak
+    message: 'weak password',
   })
-  birth: string;
+  @ApiProperty({
+    example: '@Abc1234',
+    description:
+      'Password must have at least 1 lowercase, 1 uppercase, 1 simbol and 1 number.',
+  })
+  password: string;
 }
