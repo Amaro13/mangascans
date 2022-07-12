@@ -41,7 +41,7 @@ $ npm run test:e2e
 $ npm run test:cov
 ```
 
-## 🚀 Tecnologies
+## Tecnologies
 
 This project was developed with the following tecnologies:
 
