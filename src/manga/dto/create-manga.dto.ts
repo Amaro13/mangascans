@@ -35,13 +35,6 @@ export class CreateMangaDto {
   })
   description: string;
 
-  @IsString()
-  @ApiProperty({
-    description: 'Manga Genre',
-    example: 'Action',
-  })
-  genre: string;
-
   @IsNumber({
     maxDecimalPlaces: 1,
   })
@@ -58,4 +51,10 @@ export class CreateMangaDto {
       'https://www.asurascans.com/wp-content/uploads/2021/03/Solo_Leveling_Title_Cover_-_Barak.jpg',
   })
   image: string;
+
+  @ApiProperty({
+    description: 'Id of product genres',
+    example: 'e01e8f06-e663-4fe4-b504-832fd2a1d56d',
+  })
+  genreId: string;
 }

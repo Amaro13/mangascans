@@ -4,7 +4,7 @@ export class Manga {
   description:string;
   chapters: Number;
   image: String;
-  genre: String;
   createdAt: Date;
   updatedAt: Date;
+  genreId: string;
 }

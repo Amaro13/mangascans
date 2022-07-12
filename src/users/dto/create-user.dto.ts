@@ -20,7 +20,8 @@ export class CreateUserDto {
   @MinLength(8)
   @Matches(/((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/, {
     // checks if the password is weak
-    message: 'weak password',
+    message:
+      'weak password: must be over 8 digits, have at least 3 numbers, 1 UpperCase and 1 LowerCase.',
   })
   @ApiProperty({
     example: '@Abc1234',

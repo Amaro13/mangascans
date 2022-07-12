@@ -1,9 +1,10 @@
-import { Injectable, UnprocessableEntityException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { User } from './entities/user.entity';
 import * as bcrypt from 'bcrypt';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { handleError } from 'src/utils/handle-error.util';
 
 @Injectable()
 export class UserService {
@@ -18,9 +19,7 @@ export class UserService {
       password: hashedPassword,
     };
 
-    return this.prisma.user
-      .create({ data })
-      .catch(this.handleErrorConstraintUnique);
+    return this.prisma.user.create({ data }).catch(handleError);
   }
 
   findAll(): Promise<User[]> {
@@ -34,16 +33,6 @@ export class UserService {
     return user;
   }
 
-  handleErrorConstraintUnique(error: Error): never {
-    const splitedMessage = error.message.split('`');
-
-    const errorMessage = `Entry '${
-      splitedMessage[splitedMessage.length - 2]
-    }' is not respecting the UNIQUE constraint`;
-
-    throw new UnprocessableEntityException(errorMessage);
-  }
-
   findOne(id: string): Promise<User> {
     return this.verifyIdAndReturnUser(id);
   }
@@ -53,7 +42,7 @@ export class UserService {
 
     return this.prisma.user
       .update({ where: { id }, data: dto })
-      .catch(this.handleErrorConstraintUnique);
+      .catch(handleError);
   }
 
   async remove(id: string) {
