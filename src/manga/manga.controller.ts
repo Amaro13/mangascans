@@ -8,14 +8,18 @@ import {
   Delete,
   HttpCode,
   HttpStatus,
+  UseGuards,
 } from '@nestjs/common';
 import { MangaService } from './manga.service';
 import { CreateMangaDto } from './dto/create-manga.dto';
 import { UpdateMangaDto } from './dto/update-manga.dto';
-import { ApiOperation, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
+import { AuthGuard } from '@nestjs/passport';
 
-@ApiTags('manga')
-@Controller('manga')
+@ApiTags('mangas')
+@UseGuards(AuthGuard())
+@ApiBearerAuth()
+@Controller('mangas')
 export class MangaController {
   constructor(private readonly mangaService: MangaService) {}
 
