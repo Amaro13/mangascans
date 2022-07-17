@@ -1,4 +1,4 @@
-import { IsEmail, IsString, Matches, MinLength } from 'class-validator';
+import { IsEmail, IsString, Matches, MinLength, IsUrl } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class CreateUserDto {
@@ -21,12 +21,25 @@ export class CreateUserDto {
   @Matches(/((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/, {
     // checks if the password is weak
     message:
-      'weak password: must be over 8 digits, have at least 3 numbers, 1 UpperCase and 1 LowerCase.',
+      'weak password:must have at least 1 lowercase, 1 uppercase, 1 simbol and 1 number.',
   })
   @ApiProperty({
-    example: '@Abc1234',
+    example: 'Abcd@1234',
     description:
       'Password must have at least 1 lowercase, 1 uppercase, 1 simbol and 1 number.',
   })
   password: string;
+
+  @ApiProperty({
+    description: 'The password confirmation must be the same as the password',
+    example: 'Abcd@1234',
+  })
+  confirmPassword: string;
+
+  @IsUrl()
+  @ApiProperty({
+    description: 'User profile image',
+    example: 'https://avatars.githubusercontent.com/u/88009922',
+  })
+  image: string;
 }
