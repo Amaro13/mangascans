@@ -13,8 +13,9 @@ datasource db {
 model User {
   id       String @id @default(uuid())
   email    String @unique
-  username     String @unique
+  username String @unique
   password String
+  image    String
 
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
@@ -34,8 +35,8 @@ model Manga {
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
 
-  genre Genre? @relation(fields: [genreId], references: [name], onDelete: SetNull)
-  genreId String? @map("genre_id")
+  genre Genre[]
+  genreId String @map("genre_id")
 
   favorites Favorite[]
 
