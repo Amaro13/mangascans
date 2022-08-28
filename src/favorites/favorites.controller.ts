@@ -22,6 +22,14 @@ import { FavoritesService } from './favorites.service';
 export class FavoritesController {
   constructor(private readonly favoritesService: FavoritesService) {}
 
+  @Get('')
+  @ApiOperation({
+    summary: 'List all favorites',
+  })
+  findAll() {
+    return this.favoritesService.findAll();
+  }
+
   @Post()
   @ApiOperation({
     summary: 'Favorite a manga',
