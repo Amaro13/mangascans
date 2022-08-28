@@ -52,6 +52,11 @@ export class FavoritesService {
     return this.prisma.favorite.delete({ where: { id } });
   }
 
+  async findAll(): Promise<Favorite[]> {
+    const newLocal = await this.prisma.favorite.findMany();
+    return newLocal;
+  }
+
   async getUserFavorites(id: string): Promise<Favorite[]> {
     await this.verifyUserId(id);
 
