@@ -1,10 +1,13 @@
 {
   "name": "mangascans",
   "version": "0.0.1",
-  "description": "",
+  "description": "api of mangas",
   "author": "",
   "private": true,
   "license": "MIT",
+  "engines": {
+    "node": "16.14.0"
+  },
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "nest build",
